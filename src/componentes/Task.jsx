@@ -11,7 +11,7 @@ function Task(){
     }, []);
 
     function handleClick(){
-      if (input.length < 2) {
+      if (input.length <= 2) {
         alert('Tu tarea debe tener más de dos caracteres');
     } else {
      const newTask = {

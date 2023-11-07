@@ -8,8 +8,6 @@ function TaskList(props){
     const [newInput,setNewInput]=useState('');
     const [isChecked,setIsChecked]=useState(element.status);
 
-    console.log(isChecked)
-
     function handleEdit(){
         setIsEdited(true);
         setNewInput(element.task)
