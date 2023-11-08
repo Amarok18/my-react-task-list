@@ -1,36 +1,20 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState} from 'react';
 import TaskList from './TaskList';
+import { useCBAHook } from '../hooks/useCBEHook';
+
 
 function Task(){
     const [input,setInput]=useState(" ");
-    const[tasks,setTasks]=useState([]);
-    
-    useEffect(() => {
-    const savedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-    setTasks(savedTasks);
-    }, []);
-
+    const {tasks, createTask, deleteTask, updateTask} = useCBAHook();
+    console.log(tasks);
     function handleClick(){
-      if (input.length <= 2) {
-        alert('Tu tarea debe tener más de dos caracteres');
-    } else {
-     const newTask = {
-      id: tasks.length + 1,
-      task: input,
-      status: false,
-    };
-    const updatedTasks = [newTask, ...tasks];
-    setTasks(updatedTasks);
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-    setInput('');
-  }
+        createTask(input);
+        setInput('');
     }
     const handleDelete = id =>{
-        const updateTasks = tasks.filter(task => task.id !== id);
-        setTasks(updateTasks)
-        localStorage.setItem('tasks', JSON.stringify(updateTasks));
+        deleteTask(id);
     }
-
+                                                                                                                                                                                                                                                                                                                            
     
     return (
     <div className="Task">
@@ -40,7 +24,8 @@ function Task(){
        
         <div id="alltask">
             {tasks.map((item)=>{
-                return <TaskList key={item.id} element={item} btnDelete={handleDelete} />
+                console.log(item)
+                return <TaskList key={item.id} element={item} btnDelete={handleDelete} updatedTask={updateTask}/>
             })}
         </div>
     </div>

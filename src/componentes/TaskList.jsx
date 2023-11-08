@@ -1,12 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
-import "./Tasklist.css"
+
 
 function TaskList(props){
-    const {element,btnDelete}=props;
+    const {element,btnDelete,updatedTask}=props;
     const [isEdited,setIsEdited]=useState(false);
     const [newInput,setNewInput]=useState('');
     const [isChecked,setIsChecked]=useState(element.status);
+    
+    console.log(element.id)
+
 
     function handleEdit(){
         setIsEdited(true);
@@ -16,6 +19,7 @@ function TaskList(props){
     function handleCancel(){
         setIsChecked(isChecked);
         setIsEdited(false);
+        setNewInput(element.task);
 
     }
     
@@ -23,7 +27,7 @@ function TaskList(props){
         if(newInput.length<=2){
         alert("Tu tarea debe ser mayor de 2 caracteres")
         }else{
-        element.task = newInput;
+        updatedTask(element.id,newInput)
         setIsChecked(true);
         setIsEdited(false)
         }
