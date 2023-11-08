@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import "./Tasklist.css"
+  
 
 function TaskList(props){
     const {element,btnDelete}=props;

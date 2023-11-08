@@ -39,8 +39,8 @@ function Task(){
         </label>
        
         <div id="alltask">
-            {tasks.map((item)=>{
-                return <TaskList key={item.id} element={item} btnDelete={handleDelete} />
+            {tasks?.map((item)=>{
+                return <TaskList key={item?.id} element={item} btnDelete={handleDelete} />
             })}
         </div>
     </div>
