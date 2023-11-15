@@ -17,8 +17,9 @@ export const useCBAHook = ()=>{
       task: task,
       status: false, 
     };
-    setTasks([newTask,...tasks]);
-    localStorage.setItem('tasks', JSON.stringify([newTask,...tasks]));
+    const updatedTask = [newTask, ...tasks]
+    setTasks(updatedTask);
+    localStorage.setItem('tasks', JSON.stringify(updatedTask));
     }
   };
 
