@@ -4,32 +4,39 @@ import { useCBAHook } from '../hooks/useCBAHook';
 
 
 function Task(){
-    const [input,setInput]=useState(" ");
-    const {tasks, createTask, deleteTask, updateTask} = useCBAHook();
-    console.log(tasks);
+    const [task,setTask]=useState(" ");
+    // const {tasks, createTask, deleteTask, updateTask} = useCBAHook();
+    const [isClicked,setIsClicked]=useState(false);
+    
     function handleClick(){
-        createTask(input);
-        setInput('');
+        
+        setIsClicked(true)
     }
     const handleDelete = id =>{
         deleteTask(id);
     }
                                                                                                                                                                                                                                                                                                                             
     
+    if(!isClicked){    
     return (
     <div className="Task">
-        <label><input type="text" id="Input-txt"  placeholder="Add your new task" value={input} onChange={(e)=>setInput(e.target.value)}/>
-        <button id="btn-add" onClick={handleClick}>+</button>
+        <label>
+        <button id="btn-add" onClick={handleClick}>Add a new task</button>
         </label>
-       
-        <div id="alltask">
-            {tasks.map((item)=>{
-                console.log(item)
-                return <TaskList key={item.id} element={item} btnDelete={handleDelete} updatedTask={updateTask}/>
-            })}
-        </div>
     </div>
     )
+    }else{
+    return(
+        <div className="task-description">
+            <label className='label-task-description'>
+                <input placeholder="task" id="task-input" onChange={e=>setInput(e.target.value)}/>
+                <input placeholder="task description" id="description-input"/>
+            </label>
+            <button id="btn-add-task" onClick={()=>setIsClicked(true)}>Add Task</button>
+            <button id="btn-cancel-task" >Cancel</button>
+        </div>
+    )
+    }
 }
 
 export default Task;
