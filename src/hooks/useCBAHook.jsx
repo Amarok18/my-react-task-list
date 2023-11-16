@@ -1,12 +1,8 @@
-import {useState,useEffect} from "react"
+import {useState,} from "react"
 
 export const useCBAHook = ()=>{
     const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    const savedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-    setTasks(savedTasks);
-  }, []);
+    const [descriptions,setDescription]=useState([])
 
   const createTask = (task) => {
     if (task.length <= 2) {
@@ -19,14 +15,24 @@ export const useCBAHook = ()=>{
     };
     const updatedTask = [newTask, ...tasks]
     setTasks(updatedTask);
-    localStorage.setItem('tasks', JSON.stringify(updatedTask));
     }
+  };
+  const createDescription = (description) => {
+    if (description.length <= 2) {
+      return alert('Tu description debe tener más de dos caracteres');
+    }else{
+    const newDescription = {
+      id: description.length + 1,
+      task: description,
+      status: false, 
+    };
+    const updatedDescription = [newDescription, ...descriptions]
+    setDescription(updatedDescription);
   };
 
   const deleteTask = (id) => {
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
   };
 
   const updateTask = (id, updatedText) => {
@@ -37,13 +43,14 @@ export const useCBAHook = ()=>{
       return task;
     })
     setTasks(updatedTasks);
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
   };
 
   return {
     tasks,
+    descriptions,
     createTask,
     deleteTask,
     updateTask
   };
+}
 }

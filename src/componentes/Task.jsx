@@ -4,18 +4,20 @@ import { useCBAHook } from '../hooks/useCBAHook';
 
 
 function Task(){
-    const [task,setTask]=useState(" ");
-    // const {tasks, createTask, deleteTask, updateTask} = useCBAHook();
+    const [task,setTask]=useState("");
+    const [description,setDescription]=useState("");
+    const {tasks, createTask, deleteTask, updateTask} = useCBAHook();
     const [isClicked,setIsClicked]=useState(false);
     
     function handleClick(){
-        
         setIsClicked(true)
     }
     const handleDelete = id =>{
         deleteTask(id);
     }
-                                                                                                                                                                                                                                                                                                                            
+    function handleOnClickAdd(){
+        createTask(task)
+    }                                                                                                                                                                                                                                                                            
     
     if(!isClicked){    
     return (
@@ -28,12 +30,14 @@ function Task(){
     }else{
     return(
         <div className="task-description">
+            <form>
             <label className='label-task-description'>
-                <input placeholder="task" id="task-input" onChange={e=>setInput(e.target.value)}/>
-                <input placeholder="task description" id="description-input"/>
+                <input placeholder="task" id="task-input" value={task} onChange={e=>setTask(e.target.value)}/>
+                <input placeholder="task description" value={description} onChange={e=>setDescription(e.target.value)} id="description-input"/>
             </label>
-            <button id="btn-add-task" onClick={()=>setIsClicked(true)}>Add Task</button>
-            <button id="btn-cancel-task" >Cancel</button>
+            </form>
+            <button id="btn-add-task" onClick={handleOnClickAdd}>Add Task</button>
+            <button id="btn-cancel-task">Cancel</button>
         </div>
     )
     }
