@@ -76,4 +76,4 @@ function Task(){
     }
 }
 
-export default Task;
+export {Task};
