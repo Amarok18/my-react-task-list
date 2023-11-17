@@ -24,23 +24,18 @@ body{
 }
 
 #btn-add{
-  height: 1.52rem;
-  width:100%;
-  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
-}
-#Input-txt{
-  width: 70%;
-  height: 20px;
-  background-color: #eeaf36;
-  color: black;
+  font-family: 'New Super Mario Font U',sans-serif;
+  font-size: 20px;
+  border-radius: 5px;
+  background-color: #43b047;
   margin-bottom: 10px;
+  height: 35px;
+  width:100%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
-#Input-txt::placeholder {
- color:#710C04;
-}
+
 #originDiv{
- display:flex;
- flex-direction:row;
+ height:auto;
  justify-content: center;
  margin-bottom: 5px;
  width: auto;
@@ -49,8 +44,7 @@ body{
  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
 #editDiv{
-  display: flex;
-  flex-direction: row;
+  height: auto;
   justify-content: center;
   margin-bottom: 5px;
   width: auto;
@@ -61,52 +55,135 @@ body{
 #alltask{
   width: 100%;
 }
-.task-input{
-  display:inline;
-  margin-right: 17px;
-  width: 60%;
-  position: absolute;
-  left: 30px;
-  font-family: 'New Super Mario Font U',
-    sans-serif;
 
-}
-#Input-1{
-  position: absolute;
-  left: 50px;
-}
-#btn-edit,#btn-save{
+#btn-edit{
   position: absolute;
   right: 90px;
+  margin-left: 10px;
+  border-radius: 30%;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+  background-color: #FAF057;
 }
-#btn-delete,#btn-cancel{
+#btn-delete{
   position: absolute;
   right: 50px;
+  border-radius: 30%;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+  
+}
+#btn-save{
+  position: absolute;
+  right: -350px;
+  top: -30px;
+  border-radius: 30%;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+  background-color: #B7D332;
+}
+#btn-cancel{
+  position: absolute;
+  right: -390px;
+  top: -30px;
+  border-radius: 30%;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+  background-color: #F9AF15;
+}
+.save_cancel_div{
+  position: absolute;
 }
 .Task{
   background-color:#710C04;
 }
 .label-orig,.label-edit{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 30px;
+  height:auto;
 }
-#edit-input{
-  font-family: 'New Super Mario Font U',
-    sans-serif;
+
+.label-orig{
+  display:flex; 
+}
+#Input-1{
+  height: 50px;
+  width: 18px;
+  position: absolute;
+  left: 30px;
+  margin-top: 0px;
+  margin-right: 5px;
+}
+.edit_delete_btns{
+  position: absolute;
+  margin-top: 12px;
+  right: -20px;
+}
+.task_description_div{
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  margin-left: 50px;
+}
+.tasklist-input{
+  margin-top: 3px;
+  margin-bottom: 0px;
+  font-size: 18px;
+  font-weight:100;
+  font-family: 'New Super Mario Font U',sans-serif;
+}
+.descriptionlist-input{
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+#edit-input,#edit-description{
+  font-family: 'New Super Mario Font U',sans-serif;
   background-color: #6185f8;
   border: none;
   font-size: 16px;
-  margin-right: 15px;
+  margin-right: 25px;
+  width: 80%;
+  padding-left: 0.5px;
 }
-.task-description{
-  height: auto;
+#edit-descriptiption[type="text"]{
+  font-size: 12px;
 }
+
 .label-task-description{
   display:flex;
   flex-direction: column;
 }
 #task-input,#description-input{
   border: none;
+}
+#inputForTask,
+#description-input{
+  background-color: #eeaf36;
+  color: black;
+  font-family: 'New Super Mario Font U',sans-serif;;
+}
+#inputForTask::placeholder,#description-input::placeholder{
+  font-size: medium;
+}
+#description-input{
+  height:31px
+}
+.error_task{
+  color: red;
+  font-family: 'New Super Mario Font U',sans-serif;
+  font-size: large;
+}
+.task_and_buttons,.label-task-description{
+  margin-bottom:5px;
+}
+#btn-add-task:disabled{
+  background-color: #710C04;
+}
+#btn-add-task{
+  background-color:#43b047;
+  border: none;
+  border-radius: 10%;
+  font-family: 'New Super Mario Font U', sans-serif;
+}
+#btn-cancel-task{
+  margin-left: 2px;
+  background-color: #fc7676;
+  border:none;
+  border-radius:10%;
+  font-family: 'New Super Mario Font U', sans-serif;
 }

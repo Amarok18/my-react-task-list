@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState,useEffect} from 'react';
 import TaskList from './TaskList';
 import { useCBAHook } from '../hooks/useCBAHook';
 
@@ -6,17 +6,38 @@ import { useCBAHook } from '../hooks/useCBAHook';
 function Task(){
     const [task,setTask]=useState("");
     const [description,setDescription]=useState("");
+    const [errortask,setErrorTask]=useState("")
     const {tasks, createTask, deleteTask, updateTask} = useCBAHook();
     const [isClicked,setIsClicked]=useState(false);
     
-    function handleClick(){
-        setIsClicked(true)
+    useEffect(() => {
+    if (task.length <= 2 && task != "") {
+      setErrorTask("Tu tarea debe contener mas de 2 caracteres");
+    } else {
+      setErrorTask("");
     }
-    const handleDelete = id =>{
-        deleteTask(id);
+    }, [task]); 
+    
+    function handleClick(e) {
+     e.stopPropagation();
+     setIsClicked(true);
+     }
+
+    function handleDelete(id) {
+    deleteTask(id);
+    setIsClicked(false);
     }
+
     function handleOnClickAdd(){
-        createTask(task)
+        createTask(task,description)
+        setIsClicked(false)
+        setTask("");
+        setDescription("")
+    }
+    function handleCancel(){
+        setIsClicked(false)
+        setTask("");
+        setDescription("")
     }                                                                                                                                                                                                                                                                            
     
     if(!isClicked){    
@@ -24,22 +45,34 @@ function Task(){
     <div className="Task">
         <label>
         <button id="btn-add" onClick={handleClick}>Add a new task</button>
-        </label>
+            </label>
+        <div>
+            {tasks.map((item)=>{
+                return <TaskList key={item.id} element={item} btnDelete={handleDelete} updateTask={updateTask}/>
+            })}
+        </div>
     </div>
     )
     }else{
     return(
-        <div className="task-description">
-            <form>
+        <div className="task_and_description">
+            <div className="task_and_buttons">
             <label className='label-task-description'>
-                <input placeholder="task" id="task-input" value={task} onChange={e=>setTask(e.target.value)}/>
+                <span className="error_task">{errortask}</span>
+                <input placeholder="task" id="inputForTask" value={task} onChange={e=>setTask(e.target.value)}/>
                 <input placeholder="task description" value={description} onChange={e=>setDescription(e.target.value)} id="description-input"/>
             </label>
-            </form>
-            <button id="btn-add-task" onClick={handleOnClickAdd}>Add Task</button>
-            <button id="btn-cancel-task">Cancel</button>
+            <button id="btn-add-task" onClick={handleOnClickAdd} disabled={task.length<=2}>Add Task</button>
+            <button id="btn-cancel-task" onClick={handleCancel}>Cancel</button>
+            </div>
+            <div>
+            {tasks.map((item)=>{
+                return <TaskList key={item.id} element={item} btnDelete={handleDelete} updateTask={updateTask}/>
+            })}
         </div>
-    )
+        </div>
+
+    );
     }
 }
 
