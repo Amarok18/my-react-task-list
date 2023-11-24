@@ -4,6 +4,7 @@ body {
 }
 .page{
   min-height: 100vh;
+  overflow: hidden;
 }
 .taskApp{
   background-image: url(https://www.chromethemer.com/wallpapers/chromebook-wallpapers/images/960/super-mario-bros-chromebook-wallpaper.jpg);
