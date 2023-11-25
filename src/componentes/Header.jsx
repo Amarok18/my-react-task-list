@@ -1,11 +1,12 @@
 import React from 'react';
 import '../styles/Header.css'
+import { Box, Heading } from '@chakra-ui/react';
 
 function Header(){
     return (
-    <div>
-        <h1 id='Titulo'>Todo App</h1>
-    </div>);
+    <Box>
+        <Heading id='Titulo' ml={"43vw"} mb={"1vh"}>Todo App</Heading>
+    </Box>);
 }
 
 export {Header};

@@ -2,15 +2,16 @@ import React from 'react'
 import { Menu } from './Menu'
 import { Tasks } from './Tasks'
 import '../styles/TaskApp.css'
+import { Box } from '@chakra-ui/react'
 
 function TaskApp() {
   return (
-    <div className='TaskAppPage'>
+    <Box className='TaskAppPage'>
         <Menu/>
-        <div className='TaskApp_div'>
+        <Box className='TaskApp_div'>
         <Tasks/>
-        </div>
-    </div>
+        </Box>
+    </Box>
   )
 }
 

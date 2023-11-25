@@ -1,11 +1,12 @@
 import React from 'react'
 import '../styles/Loading.css'
+import { Box } from '@chakra-ui/react'
 
 function Loading() {
   return (
-    <div className="loader-container">
-        <div className="spinner"></div>
-    </div>
+    <Box className="loader-container">
+        <Box className="spinner"></Box>
+    </Box>
   )
 }
 

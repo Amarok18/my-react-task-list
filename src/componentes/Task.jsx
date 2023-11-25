@@ -1,4 +1,16 @@
 import React, { useState,useEffect} from 'react';
+import { Box,Textarea } from "@chakra-ui/react";
+import { Button, Input, FormControl, FormLabel,FormErrorMessage, Alert , AlertIcon} from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import TaskList from './TaskList';
 import { useCBAHook } from '../hooks/useCBAHook';
 
@@ -9,10 +21,14 @@ function Task(){
     const [errortask,setErrorTask]=useState("")
     const {tasks, createTask, deleteTask, updateTask} = useCBAHook();
     const [isClicked,setIsClicked]=useState(false);
+ 
+
+    const initialRef = React.useRef(null)
+    const finalRef = React.useRef(null)
     
     useEffect(() => {
-    if (task.length <= 2 && task != "") {
-      setErrorTask("Tu tarea debe contener mas de 2 caracteres");
+    if ((task.length <= 2 && task != "") || task.length>20) {
+      setErrorTask("Tu tarea debe contener mas de 2 caracteres y menos de 20 caracteres");
     } else {
       setErrorTask("");
     }
@@ -42,36 +58,119 @@ function Task(){
     
     if(!isClicked){    
     return (
-    <div className="Task">
-        <label>
-        <button id="btn-add" onClick={handleClick}>Add a new task</button>
-            </label>
-        <div>
-            {tasks.map((item)=>{
-                return <TaskList key={item.id} element={item} btnDelete={handleDelete} updateTask={updateTask}/>
+      <Box>
+        <Box className="Task">
+          <label>
+            <Button
+              id="btn-add"
+              onClick={handleClick}
+            >
+              Add a new task
+            </Button>
+          </label>
+          <Box>
+            {tasks.map((item) => {
+              return (
+                <TaskList
+                  key={item.id}
+                  element={item}
+                  btnDelete={handleDelete}
+                  updateTask={updateTask}
+                />
+              );
             })}
-        </div>
-    </div>
-    )
+          </Box>
+        </Box>
+      </Box>
+    );
     }else{
-    return(
-        <div className="task_and_description">
-            <div className="task_and_buttons">
-            <label className='label-task-description'>
-                <span className="error_task">{errortask}</span>
-                <input placeholder="task" id="inputForTask" value={task} onChange={e=>setTask(e.target.value)}/>
-                <input placeholder="task description" value={description} onChange={e=>setDescription(e.target.value)} id="description-input"/>
-            </label>
-            <button id="btn-add-task" onClick={handleOnClickAdd} disabled={task.length<=2}>Add Task</button>
-            <button id="btn-cancel-task" onClick={handleCancel}>Cancel</button>
-            </div>
-            <div>
-            {tasks.map((item)=>{
-                return <TaskList key={item.id} element={item} btnDelete={handleDelete} updateTask={updateTask}/>
-            })}
-        </div>
-        </div>
+    return (
+      <Box>
+        <Box className="task_and_description">
+          <Modal
+            initialFocusRef={initialRef}
+            finalFocusRef={finalRef}
+            isOpen={handleClick}
+            onClose={handleCancel}
+          >
+            <ModalOverlay />
+            <ModalContent
+              bgSize={"100%"}
+              bgImage={
+                "https://i.pinimg.com/1200x/89/37/38/893738e5c56a29842ccd995d45af7c55.jpg"
+              }
+            >
+              <ModalHeader
+                color={"white"}
+                fontFamily={"Super Mario World Text Box"}
+              >
+                TASK MANAGER
+              </ModalHeader>
+              <ModalCloseButton />
+              <ModalBody pb={6}>
+                <FormControl
+                  isInvalid={
+                    (task.length <= 2 && task != "") || task.length > 20
+                  }
+                >
+                  <FormLabel
+                    color={"white"}
+                    fontFamily={"Super Mario World Text Box"}
+                  >
+                    TASK
+                  </FormLabel>
+                  <FormErrorMessage>
+                    <Alert status="warning">
+                      <AlertIcon />
+                      {errortask}
+                    </Alert>
+                  </FormErrorMessage>
+                  <Input
+                    color={"white"}
+                    ref={initialRef}
+                    placeholder="First name"
+                    value={task}
+                    onChange={(e) => setTask(e.target.value)}
+                  />
+                </FormControl>
 
+                <FormControl mt={4}>
+                  <FormLabel
+                    color={"white"}
+                    fontFamily={"Super Mario World Text Box"}
+                  >
+                    Task Description
+                  </FormLabel>
+                  <Textarea
+                    color={"white"}
+                    placeholder="Last name"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                </FormControl>
+              </ModalBody>
+
+              <ModalFooter>
+                <Button
+                  isDisabled={
+                    task.length <= 2 && task == "" || task.length > 20
+                  }
+                  _disabled={{
+                    bgColor:"red",
+                    opacity:"0.2"
+                  }}
+                  colorScheme="blue"
+                  mr={3}
+                  onClick={handleOnClickAdd}
+                >
+                  Save
+                </Button>
+                <Button onClick={handleCancel}>Cancel</Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </Box>
+      </Box>
     );
     }
 }
