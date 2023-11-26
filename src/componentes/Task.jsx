@@ -30,6 +30,13 @@ function Task(){
         setTasks(updateTasks)
         localStorage.setItem('tasks', JSON.stringify(updateTasks));
     }
+    const updateTasks = (updatedTask) => {
+      const updatedTasks = tasks.map((task) =>
+        task.id === updatedTask.id ? updatedTask : task
+      );
+      setTasks(updatedTasks);
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    };
 
     
     return (
@@ -40,7 +47,14 @@ function Task(){
        
         <div id="alltask">
             {tasks?.map((item)=>{
-                return <TaskList key={item?.id} element={item} btnDelete={handleDelete} />
+                return (
+                  <TaskList
+                    key={item?.id}
+                    element={item}
+                    btnDelete={handleDelete}
+                    updateTasks={updateTasks}
+                  />
+                );
             })}
         </div>
     </div>
