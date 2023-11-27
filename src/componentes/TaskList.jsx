@@ -30,7 +30,7 @@ function TaskList(props){
         alert("Tu tarea debe ser mayor de 2 caracteres")
         }else{
         updateTask(element.id,newInput,newDescript)
-        setIsChecked(true);
+        setIsChecked(isChecked);
         setIsEdited(false)
         }
     }
