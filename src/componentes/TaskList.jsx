@@ -62,7 +62,7 @@ function TaskList(props){
         alert("Tu tarea debe ser mayor de 2 caracteres")
         }else{
         updateTask(element.id,newInput,newDescript)
-        setIsChecked(true);
+        setIsChecked(isChecked);
         setIsEdited(false)
         }
     }
@@ -86,7 +86,7 @@ function TaskList(props){
                 transform: "scale(1.5,1.5)",
                 transition: "all 300ms",
               }}
-              checked={isChecked}
+              isChecked={isChecked}
               onChange={() => setIsChecked(!isChecked)}
             />
             <Box className="task_description_div">
